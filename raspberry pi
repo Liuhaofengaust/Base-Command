@@ -1,0 +1,25 @@
+《树莓派上手指南》
+
+1、格式化SD卡，将下载的系统镜像烧录进sd卡（用工具实现）
+2、编写wpa_suplicant.conf文件配置树莓派网络连接等；
+	
+	country=CN
+	ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+	update_config=1
+	
+	network={
+	ssid="这里输入连接的WIFI名称"
+	psk="这里输入密码"
+	key_mgmt=WPA-PSK
+	priority=1          #这里设置网络块优先级，数字越大越高级
+	}
+ 
+	编写空ssh文件；
+	这两个文件都复制到root目录下
+	
+3、查看树莓派的ip地址；
+	1）在CMD中输入arp-a指令查看动态ip是否为两个（其中一个为电脑本身的，另一个为树莓派的）
+	2）手机下载“终端模拟器”，在里面输入ip neigh
+	
+	
+4、进入系统后看收藏的树莓派教程，更换源的时候一定要和树莓派系统相匹配

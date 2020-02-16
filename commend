@@ -1,0 +1,186 @@
+<首先加入一点vim的常用技巧>
+
+正常模式 、插入模式 、指令模式
+首先进入的是正常模式，
+这里进行文档的拷贝当前行(yy /p),以下n行(nyy)
+删除当前行(dd ) 以下n行（ndd），
+/单词(查找单词，n)
+:ste nu    :set nonu  (行号)
+u (撤销)  gg(首航) G(尾行)  n shift+g(到n行)
+
+按i进入插入模式，a只不过是光标移动到下一位。
+
+指令模式进行 保存退出(:wq)、不保存退出(:q)、
+强制退出(:q!)
+
+
+
+《以下针对Ubuntu18.04》
+
+显示显卡类型：　　　ubuntu-drivers devices
+内存数据同步到磁盘：sync
+退出远程登录：      logout
+添加用户：          useradd (useradd -d 目录)
+                    useradd -g 用户组 用户名
+制定密码 ：         passwd
+删除用户:           userdel  (保留家目录)
+                    userdel -r (不保留家目录)
+查询用户信息:       id 
+添加组：            groupadd  (groupdel)
+转组：              usermod -g 组 用户
+
+查看运行级别：      runlevel
+运行级别配置文件;   (暂缺)
+
+创建多级目录：       mkdir -p
+删除空目录：         rmdir
+删除目录：           rm -rf
+删除文件：           rm  ( -f不提示)
+创建空文件：         touch
+
+拷贝(整个目录)：     cp source dem (cp -r )
+覆盖拷贝：           \cp -r  (强制覆盖)
+
+移动：               mv /home/test.txt  /root
+重命名：             mv odefilename new..
+
+浏览：               cat   (cat -n ...  | more)
+                     more
+                     (ctrl+b上翻，ctrl+f下翻)
+大文件查看:          lessi
+
+查看文件前几行：     head -n 5 file
+查看文件后几行:      tail -n 5 file
+实时监控文件更新:    tail -f file  （ctrl+c退出）
+
+覆盖写：             ll > 文件 (文件列表列表写入)
+追加写：             ll >> 文件
+覆盖写：             cat 文件1 > 文件2
+写入内容:            echo content >> file
+
+输出内容到控制台:    echo ($PATH)
+日历信息:            cal
+
+软连接:              ln -s [源目录][软链接]
+
+历史指令：           history
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+日期：               date "+%Y-%m-%d %H:%M:%S"
+设置日期：           date -s "1999-12-27 12:00:00"
+                 
+查找：               find [目录] [限制] [限制内容]
+                     find ..... user ...
+查找大于20M的文件    find / size +20M(范围/方式/限制)
+                     find / -name *.txt
+
+快速定位文件路径:    updatedb
+                     locate hello.txt
+
+检索信息：           cat hello | grep yes(-n、-i)
+
+压缩文件(不保留压缩): gzip   (gunzip 解压)
+压缩：               zip (-r) myzip.zip  /home/
+解压：               unzip (-d [指定目录])[解压文件]
+
+压缩：               tar -zcvf [..tar.gz] [进行打包的文件 / 目录]
+解压:                tar -zxvf [解压的文件] [-C 指定目录]
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+《组管理和权限管理》
+查看文件所有者：      ls -ahl
+改变文件所有者:       chown [user][file]  (chown -R [user] [mulu])
+改变文件所在组:       chgrp [group][file] (      -R              )
+
+                      -rwx-w-r-- 1 root root 1213 feb 2 09:39 abc
+                      (r=4 w=2 x=1)
+
+修改文件/目录权限:    chmod u=rw,g=x,o=x [file] 
+                      (u:所有者, g:所在组, o:其他组, a前面所有)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+定时任务编辑:         crontab -e
+(*/10 7,8  0-23 1-12 1-7 [指令]) (每隔10分钟，7点和8点，0-23号，1-12月，星期1-7 执行后面的指令)
+终止任务调度：        crontab -r
+列出任务调度：        crontab -l
+重启任务调度:         service crond restart
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<增加硬盘>(添加硬盘、分区、格式化、挂载、配置)
+
+查看linux磁盘分区：   lsblk (lsblk -f)
+磁盘分区:             fdisk [磁盘]
+格式化:               mkfs -t ext4 [磁盘]
+挂载:                 mount [磁盘] [目录]
+永久挂载:             vim [/etc/硬盘名] (umount卸载)
+                      (/dev/硬盘名   [挂载目录] [后面参考已有的硬盘])
+                      mount -a
+
+系统整体磁盘信息查询: df -lh
+指定目录磁盘占用情况: du -lh (-a含文件 --max-depth 子目录深度 -c增加汇总值)   (du -ach --max-depth=1 /home)
+统计目录下文件数：    ls -l /home | grep"^-" | wc -l
+统计指定及其子目录下目录数: (ls -lR ......"^d")
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+查看网络IP、网关       ip a
+查看进程:              ps -aux  (ps -ef 父进程) (ps -aux | grep sshd)
+过滤:                  grep
+终止进程：             kill
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+查看安装了那些软件     dpkg -l
+查找是否安装了软件     dpkg -l "*google*"
+彻底卸载某个软件       dpkg apt-get--purge remove <programname>
+如果想删除apt-get下载的某个软件安装包呢？
+Ubuntu 中apt-get下载的安装包放在/var/cache/apt/archives里。所以可以在这个路径下删除
+		      apt-get autoclean
+将已安装的软件包的安装包也删除掉
+		      apt-get clean
+
+####卸载ros######
+	sudo apt-get purge ros-*
+	sudo rm -rf /etc/ros
+	gedit ~/.bashrc         //删除环境变量
+	source ~/.bashrc
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+####忘记root密码########
+sudo -i
+passwd
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#科学上网#
+sudo apt-get insatll shadowsocks
+
+sslocal  //查看命令是否存在判断安装成功
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
