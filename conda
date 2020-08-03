@@ -1,5 +1,6 @@
-//配置环境变量到Scripts文件  conda --version检查是否配置成功
+# Conda相关命令操作
 
+## 最常用命令
 conda env list        查看env所有命令
 codna upgrade --all   升级所有工具包
 conda create -n python37 python=3.7 创建单独虚拟环境
@@ -11,9 +12,15 @@ conda remove  pakagename
 conda env export > environment.yaml    导出当前环境包信息
 conda env creat -f environment.yaml    创建包相同的虚拟环境
 
-anaconda瘦身大法:
-conda clean -p
-conda clean -t
+## anaconda瘦身大法:
+	* conda clean -p
+	* conda clean -t
+
+## Jupyter-Notebook中查看python运行目录:
+	* import sys
+	* sys.executable
+
+## 配置环境变量到Scripts文件  conda --version检查是否配置成功
 
 
 ###########################################################################################

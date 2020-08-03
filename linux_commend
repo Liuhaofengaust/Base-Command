@@ -157,6 +157,12 @@ sudo apt-get insatll shadowsocks
 
 sslocal  //查看命令是否存在判断安装成功
 
+## 清理Linux软件包垃圾
+	* df -a -h	显示磁盘使用情况
+	* sudo apt-get autoclean
+	* sudo apt-get autoremove
+	* suod apt-get clean --清理所有安装包，不破坏系统
+
 
 
 
