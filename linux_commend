@@ -48,7 +48,7 @@ i, o, a, s  四个按键不同插入
 覆盖写：             cat 文件1 > 文件2
 追加内容:            echo content >> file
 
-输出内容到控制台:    echo ($PATH)
+输出内容到控制台:     echo ($PATH)
 日历信息:            cal
 
 软连接:              ln -s [源目录][软链接]
@@ -61,14 +61,14 @@ i, o, a, s  四个按键不同插入
 日期：               date "+%Y-%m-%d %H:%M:%S"
 设置日期：           date -s "1999-12-27 12:00:00"
                  
-查找：               find [目录] [选项]
-                     find . (-user group)
-					 find / -name *.txt
-					 find . -perm 776
-					 find / size （- +20M)
-					 find . -type (b块设备文件 d目录 f普通文件 c字符设备文件 p管道文件)
-					 find . atime (+n -n)   在文件更改时间距现在n天以内  以外
-					 find . -user zhangsan (-a和 o或 not非) -type f
+查找:               find [目录] [选项]
+                    find . (-user group)
+		    find / -name *.txt
+		    find . -perm 776
+	            find / size （- +20M)
+		    find . -type (b块设备文件 d目录 f普通文件 c字符设备文件 p管道文件)
+		    find . atime (+n -n)   在文件更改时间距现在n天以内  以外
+		    find . -user zhangsan (-a和 o或 not非) -type f
                      
 
 过滤文本内容：       cat file | grep (-i (^# 以#开头) #$ n) (检索内容) 
@@ -84,11 +84,11 @@ i, o, a, s  四个按键不同插入
 压缩：               tar -zcvf [..tar.gz] [进行打包的文件 / 目录]
 解压:                tar -zxvf [解压的文件] [-C 指定目录]
 
-快速定位文件路径:    updatedb
+快速定位文件路径:     updatedb
                      locate hello.txt
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-《组 用户 权限 的管理》
+《组 用户 权限的管理》
 
 /etc/passwd (用户信息)
 /etc/shadow (密码权限)
@@ -97,17 +97,17 @@ i, o, a, s  四个按键不同插入
 
 /var/spool/mail
 
-查询用户信息:       id 
+查询用户信息:        id 
 
-添加用户：          useradd  用户名     (useradd -d 目录)
+添加用户:            useradd  用户名     (useradd -d 目录)
                     useradd -g 用户组 用户名  （同时添加到附加组，此时有两个组）
-制定密码 ：         passwd  用户名
+制定密码 ：          passwd  用户名
 
-删除用户:           userdel  用户名 (保留家目录)
-                    userdel -r 用户名 (不保留家目录)
+删除用户:            userdel  用户名 (保留家目录)
+                     userdel -r 用户名 (不保留家目录)
 					
-添加组：            groupadd  (groupdel)
-转组：              gpasswd -a 用户 组
+添加组：             groupadd  (groupdel)
+转组：               gpasswd -a 用户 组
 
 查看文件所有者：      ls -al
 改变文件所有者:       chown [user][file]  (chown 张三:李四 file )  (-R 递归修改子目录)
@@ -132,13 +132,14 @@ i, o, a, s  四个按键不同插入
 磁盘分区:             fdisk [磁盘]
 格式化:               mkfs -t ext4 [磁盘]
 挂载:                 mount [磁盘] [目录]
-永久挂载:             vim [/etc/硬盘名] (umount卸载)
-                      (/dev/硬盘名   [挂载目录] [后面参考已有的硬盘])
-                      mount -a
+永久挂载:             
+     查看分区UUID号:  ls -l /dev/disk/by-uuid
+     写入文件:        sudo gedit /etc/fstab
 
-系统整体磁盘信息查询: df -lh
-指定目录磁盘占用情况: du -lh (-a含文件 --max-depth 子目录深度 -c增加汇总值)   (du -ach --max-depth=1 /home)
-统计目录下文件数：    ls -l /home | grep"^-" | wc -l
+
+系统整体磁盘信息查询:  df -lh
+指定目录磁盘占用情况:  du -lh (-a含文件 --max-depth 子目录深度 -c增加汇总值)   (du -ach --max-depth=1 /home)
+统计目录下文件数：     ls -l /home | grep"^-" | wc -l
 统计指定及其子目录下目录数: (ls -lR ......"^d")
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
