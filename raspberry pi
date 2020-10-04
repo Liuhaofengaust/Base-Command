@@ -23,3 +23,12 @@
 	
 	
 4、进入系统后看收藏的树莓派教程，更换源的时候一定要和树莓派系统相匹配
+
+《安装摄像头》
+sudo apt-get install luvcview
+luvcview -s 720x640
+
+
+远程连接初始化密码：raspberry
+
+设置页面： sudo raspi-config
