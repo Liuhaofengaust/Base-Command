@@ -1,12 +1,12 @@
 # 《This are some ros base commends》
 
-1、 小海龟
-启动Ros Master:       roscore
+## 小海龟
+启动Ros Master:      roscore
 启动小海龟仿真器:     rosrun turtlesim turtlesim_node
 启动海龟控制节点:     rosrun turtlesim turtle_teleop_key
 
 
-# 《ros常用命令》
+## 《ros常用命令》
 
  !工作空间
 	* src     --功能包   
@@ -19,46 +19,56 @@
 	* psckage.xml    --属性，依赖项
 	* msg --消息  |  srv --服务  |  action --动作
 
-1、创建工作空间          mkdir -p ~/catkin_ws/src   (结尾文件夹必须是src)
-                        catkin_init_workspace       初始化为工作空间
+1、创建工作空间          
+	* mkdir -p ~/catkin_ws/src   (结尾文件夹必须是src)
+        * catkin_init_workspace       初始化为工作空间
 
-2、编译工作空间          cd ~/catkin_ws/
-              		catkin_make                 来到根目录，进行编译
+2、编译工作空间          
+	* cd ~/catkin_ws/
+        * catkin_make                 来到根目录，进行编译
 
-3、刷新环境变量          source devel/setup.bash
+3、刷新环境变量          
+	* source devel/setup.bash
 
-4、检查环境变量          echo $ROS_PACKAGE_PATH
-(3/4两步是一次性的,可以修改配置文件获得永久性, echo "source ~/(工作空间)/devel/setup.bash" >> ~/.bashrc)
-
-
-创建功能包             catkin_create_pkg (包名)(依赖)
-		      catkin_create_pkg pkg_test roscpp rospy std_msgs
+4、检查环境变量          
+	* echo $ROS_PACKAGE_PATH
+	* (3/4两步是一次性的,可以修改配置文件获得永久性, echo "source ~/(工作空间)/devel/setup.bash" >> ~/.bashrc)
 
 
-编译功能包             catkin_make (在工作空间根目录下)
-		      从github上克隆是在src根目录下
-                      编译成功的可执行文件在devel/lib对应的功能包里面
+ 创建功能包             
+	* catkin_create_pkg (包名)(依赖)
+ 	* catkin_create_pkg pkg_test roscpp rospy std_msgs
 
+
+ 编译功能包             
+	* catkin_make (在工作空间根目录下)
+	* 从github上克隆是在src根目录下
+        * 编译成功的可执行文件在devel/lib对应的功能包里面
+
+---
 
  运行节点              
 	* rosrun (功能包)(节点)
 
  命令行话题控制        
 	* rostopic
-        * rostopic list  --列出话题
+        * rostopic list            --列出话题
+	* rostopic info topicname  --查看话题的信息
+	* rostopic echo topicname  --查看话题的输出
+	* rostopic hz   topicname  --查看话题发布频率
+	* rostopic bw   topicname  --查看话题通信带宽
 
  发布话题	      
 	* rostopic pub (-r 10一秒几次频率) (话题名)(消息结构)(消息内容/tab) 
 	* rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist "liner:....
+ 调用服务
+	* rosservice call servername contant 
+	* rosservice call look_up_name "Bob"
 
-
- 查看某个topic的属性   
-	* rostopic info (topic)
-
- 命令行监听显示某个topic的内容    
-	* rostopic echo (topic)
-
- 查看消息类型          
+ 查看消息类型 
+	* roscd std_msgs   --查看ros内置消息的数据类型
+	* roscd std_srvs   --查看ros内置服务的数据类型   
+      
 	* rosmsg show (消息结构)      
 	* rosmsg show geometry_msgs/Twist
 	* rosmsg list
@@ -67,20 +77,35 @@
 
  节点操作，显示信息     
 	* rosnode list
-	* rosnode info (节点名)   
+	* rosnode info nodename   
+
+ 参数管理
+	* rosparam list
+	* rosparam set param-key param-value --设置某个参数值
+	* rosparam delete param_key	     --删除某个参数
+	* rosparam dump file_name.yaml       --保存当前参数到文件
+	* rosparam load file_name	     --从文件读取参数
+---
+	* rosparam dump name.yaml            --将现在所有参数及其值保存在文件中
+	* rosparam list               	     --显示所有参数
+	* rosparam get (参数)                --得到参数值
+	* rosparam set (参数) (value)        --修改参数值
+	* rosparam load file.yaml            --落实文件参数
+	* rosparam delete (参数)             --删掉参数
 
 
- 服务                  
-	* rosservice   (rosservice list --列出服务)
 
- 调用服务
-	* rosservice call  (话题名 )(消息结构)(消息内容/tab)   
+ 启动多个节点         
+	* roslaunch (pkg) (file_name.launch)
+
+
 
  保存实验记录              
 	* rosbag (record --记录) -a -o (压缩包名)
 
  复现保存内容          
 	* rosbag play (cmd_record.bag --文件名) 
+
 
  安装pkg所需的依赖     
 	* rosdep install (包名)
@@ -93,61 +118,36 @@
 	* rospack find (包名)
 	* rospack list
 
- 参数命令行操作
-	* rosparam list
-	* rosparam set param-key param-value 设置某个参数值
-	* rosparam delete param_key	     删除某个参数
-	* rosparam dump file_name.yaml       保存当前参数到文件
-	* rosparam load file_name	     从文件读取参数
 
 
-# <roslaunch --启动master和多个node>
-         
-roslaunch (pkg)(file_name.launch)
+tf坐标变换  --sudo apt-get install ros-melodic-turtle-tf
 
-编译成功后文件保存在(devel/lib/...)
-
-
-
-#【参数】---rosparam
-
-rosparam dump name.yaml  --将现在所有参数及其值保存在文件中
-
-rosparam list  --显示所有参数
-rosparam get (参数)  --得到参数值
-rosparam set (参数) (value) --修改参数值
-
-rosparam load file.yaml  --落实文件参数
-
-rosparam delete (参数)  --删掉参数
-
-
-#【tf坐标变换】 --sudo apt-get install ros-melodic-turtle-tf
-
-roslaunch turtle_tf turtle_tf_demo.launch
-rosrun turtlesim turtle_teleop_key
-rosrun tf view_frames  --保存tf节点连接方式文件
-rosrun tf tf-ecjo (turtle1) (turtle2) --查看两节点的位置关系
-rosrun rviz rviz -d `rospack find turtle_tf` /rviz/turtle_rviz.rviz 
+	* roslaunch turtle_tf turtle_tf_demo.launch
+	* rosrun turtlesim turtle_teleop_key
+	* rosrun tf view_frames                 --保存tf节点连接方式文件
+	* rosrun tf tf-ecjo (turtle1) (turtle2) --查看两节点的位置关系
+	* rosrun rviz rviz -d `rospack find turtle_tf` /rviz/turtle_rviz.rviz 
 
 
 #【ROS工具】
 
 rqt   --不用rosrun
-	rqt_console   --显示ros日志信息（错误，警告..）
-	rqt_graph     --各节点链接图
-	rqt_plot      --绘制数据曲线
-	rqt_reconfigure --参数动态配置工具
-	rqt_image_view --图像显示、渲染
+	* rqt_console     --显示ros日志信息（错误，警告..）
+	* rqt_graph       --各节点链接图
+	* rqt_plot        --绘制数据曲线
+	* rqt_reconfigure --参数动态配置工具
+	* rqt_image_view  --图像显示、渲染
 
-rviz  --三维数据显示平台(现有数据也就是先指定话题)   rosrun rviz rviz
-	rviz首先添加工具，然后选择话题
+rviz  --三维数据显示平台(现有数据也就是先指定话题)   
+	* rosrun rviz rviz --rviz首先添加工具，然后选择话题
 
-gazebo --三维物理仿真平台   roslaunch gazebo_ros ..
+gazebo --三维物理仿真平台   
+	* roslaunch gazebo_ros ..
+
 
 # URDF文件
-	* check_urdf file.urdf    解析文件，检测是否错误
-	* urdf_to_graphiz file.urdf  查看模型的整体结构图
+	* check_urdf file.urdf       --解析文件，检测是否错误
+	* urdf_to_graphiz file.urdf  --查看模型的整体结构图
 	
 
 
