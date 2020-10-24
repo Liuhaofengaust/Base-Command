@@ -1,0 +1,9 @@
+# python总结
+
+##变量
+* 创建变量   math=10   不用类型声明
+
+* 用引号括起来的都是字符串 不存在字符
+** "hello'name' world"  // 显示单引号
+
+* name.title() .upper .lower 

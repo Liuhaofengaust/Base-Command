@@ -1,17 +1,17 @@
-<首先是vim的常用技巧>
+# <首先是vim的常用技巧>
 
 命令模式 、编辑模式 、尾行模式
 
-# 命令模式 
+### 命令模式 
 文档拷贝当前行(yy | p 粘贴到下面)  (nyy 复制n行)
 删除当前行(dd )  （ndd  删除n行）
 (0-行首/$-行尾) (gg-文档首行/G-文档末行/3gg-文档第三行)
 u (撤销)  gg(首航) G(尾行)  n shift+g(到n行)
 
-# 插入模式
+### 插入模式
 i, o, a, s  四个按键不同插入
 
-# 尾行模式
+### 尾行模式
 保存(:w)、不保存退出(:q)、强制退出(:q!)
 :ste nu    :set nonu  (行号)
 替换:  
@@ -21,7 +21,7 @@ i, o, a, s  四个按键不同插入
 /内容  （n/N 上下查找）
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-《以下针对Ubuntu18.04》
+# 《以下针对Ubuntu18.04》
 
 创建目录：           mkdir   ( -p 添加多级目录)
 删除空目录：         rmdir
@@ -188,6 +188,24 @@ sslocal  //查看命令是否存在判断安装成功
 	* sudo apt-get autoclean
 	* sudo apt-get autoremove
 	* suod apt-get clean --清理所有安装包，不破坏系统
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# SSH远程登录
+
+### 安装
+	* sudo apt-get install openssh-client
+	* sudo apt-get install openssh-server
+
+### 查看SSH服务是否启动
+	* ps -e | grep ssh
+	
+### SSH服务管理
+	* sudo /etc/init.d/ssh (restart/stop/start)
+	
+### SSH远程登录
+	* ssh name@ip
+	* ssh -X name@ip (调用图形界面程序)
+	* ssh -p 23 name@ip (通过23号端口登录)
+
 
 
 
