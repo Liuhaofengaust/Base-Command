@@ -21,7 +21,9 @@
     >
     > * docker rmi -f $(docker images -aq)  **删除所有容器**
 
+* **修改镜像名称**
 
+  > * docker tag [imagename] [newimagename]
 
 
 
@@ -63,8 +65,8 @@
 
 * **进入容器**
 
-  > * docker exec [容器ID]   **进入容器 开启一个新的终端**
-  > * docker attach [容器ID]  **进入容器 正在执行的终端**
+  > * docker exec [容器ID]  /bin/bash **进入容器 开启一个新的终端**
+  > * docker attach [容器ID]  /bin/bash **进入容器 正在执行的终端**
 
 * **查看容器信息**
 
@@ -161,5 +163,6 @@
 
 * **发布镜像**
 
-  > * docker login -u [用户名]
+  > * docker login 
+  >   * -u [用户名]  **直接输入用户名**
   > * docker push [镜像命名] 
